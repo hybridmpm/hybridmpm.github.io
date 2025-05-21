@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="We propose a neural physics system for real-time, interactive fluid simulations. Traditional physics-based methods, while accurate, are computationally intensive and suffer from latency issues. Recent machine‑learning methods reduce computational costs while preserving fidelity; yet most still fail to satisfy the latency constraints for real‑time use and lack support for interactive applications. To bridge this gap, we introduce a novel hybrid method that integrates numerical simulation, neural physics, and generative control. Our neural physics jointly pursues low-latency simulation and high physical fidelity by employing a fallback safeguard to classical numerical solvers. Furthermore, we develop a diffusion-based controller that is trained using a revserve modeling strategy to generate external dynamic force fields for fluid manipulation. Our system demonstrates robust performance across diverse 2D/3D scenarios, material types, and obstacle interactions, achieving real-time simulations at high frame rates (11~29% latency) while enabling fluid control guided by user-friendly freehand sketches. We present a significant step towards practical, controllable, and physically plausible fluid simulations for real-time interactive applications.">
+  <meta name="keywords" content="Large Language Model, PDE, AI-for-Math, Autoformalization, Reasoning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hybrid Neural-MPM for Interactive Fluid Simulations in Real-Time</title>
+  
+  <script src="https://kit.fontawesome.com/854f31a6c4.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/dataTables.bulma.css">
+  <link rel="icon" href="./static/images/logo.png">
+</head>
+
+
+<body>
+
+<!-- paper title and author -->
+<section class="section">
+  <!-- <div class="hero-body"> -->
+    <div class="container is-max-desktop no_max_width">
+      <div class="columns is-centered">
+        <div class="column has-text-centered is-four-fifths">
+          <h1 class="title is-1 publication-title">
+            <img src="./static/images/logo.png" width="80"/>
+            <!-- <span class="rainbow_text_animated">PDE-Controller</span> -->
+            <span>Hybrid Neural-MPM for Interactive Fluid Simulations<br>in Real-Time</span>
+          </h1>
+          <!-- <h2 class="subtitle is-3 publication-subtitle"></h2> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="", target="_blank">
+                <span class="fancy_text_color">Jingxuan Xu</span>
+              </a><sup>1*</sup>,
+            </span>
+
+            <span class="author-block">
+              <a href="", target="_blank">
+                <span class="fancy_text_color">Hong Huang</span>
+              </a><sup>2*</sup>,
+            </span>
+
+            <span class="author-block">
+              <a href="https://zouchuhang.github.io/", target="_blank">
+                <span class="fancy_text_color">Chuhang Zou</span>
+              </a><sup>3</sup>,
+            </span>
+
+            <span class="author-block">
+              <a href="https://msavva.github.io/", target="_blank">
+                <span class="fancy_text_color">Manolis Savva</span>
+              </a><sup>2</sup>,
+            </span>
+
+            <span class="author-block">
+              <a href="https://weiyc.github.io/", target="_blank">
+                <span class="fancy_text_color">Yunchao Wei</span>
+              </a><sup>1&dagger;</sup>,
+            </span>
+
+            <span class="author-block">
+              <a href="https://delta-lab-ai.github.io/", target="_blank">
+                <span class="fancy_text_color">Wuyang Chen</span>
+              </a><sup>2&dagger;</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal Contribution</span>
+            <span class="author-block"><sup>&dagger;</sup>Correspondence</span><br>
+            <span class="author-block"><sup>1</sup>Institute of Information Science, Beijing Jiaotong University</span><br>
+            <span class="author-block"><sup>2</sup>School of Computing Science, Simon Fraser University</span><br>
+            <span class="author-block"><sup>3</sup>Meta Reality Labs</span>
+            <!-- <br> -->
+            <!-- <span class="author-block"><b style="color:#f41c1c">NeurIPS 2024</b></span> -->
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- arxiv link -->
+              <span class="link-block">
+                <a href="http://arxiv.org/abs/"
+                   class="external-link button is-normal is-rounded is-dark", target="_blank">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/delta-lab-ai/"
+                   class="external-link button is-normal is-rounded is-dark", target="_blank">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Models Link. -->
+              <span class="link-block">
+                <a href=""
+                    class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fa fa-network-wired"></i>
+                  </span>
+                  <span>Models</span>
+                </a>
+              </span>
+              <!-- Data Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/delta-lab-ai/"
+                   class="external-link button is-normal is-rounded is-dark", target="_blank">
+                  <span class="icon">
+                    <i class="fa fa-database"></i>
+                  </span>
+                  <span>Data</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="has-text-centered">
+          <img src="./static/images/teaser_key.png" width="900">
+        </div>
+        </div>
+      </div>
+      <!-- teaser video -->
+      <br>
+      <div class="columns is-centered">
+        <div class="has-text-centered">
+          <!-- <h2 class="title is-5">Sand Example</h2> -->
+            <!-- <video id="teaser1" autoplay muted width="60%" controls> -->
+            <video id="teaser1" autoplay muted loop width="500" controls>
+                <source src="static/videos/render_pipline_sand3d_2.mp4" type="video/mp4">
+            </video>
+        </div>
+        <!-- <div class="column is-half has-text-centered">
+          <h2 class="title is-5">Wave Example</h2>
+            <video id="teaser2" autoplay muted width="100%" controls>
+                <source src="static/videos/wave.mp4" type="video/mp4">
+            </video>
+        </div> -->
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h3 class="subtitle has-text-centered">
+          </h3>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">
+          <span class="fancy_text_color">Introduction</span>
+        </h2>
+        <div style="margin-bottom: 1em;">
+          <p>
+            We propose a <span class="fancy_text_color">neural physics system for real-time, interactive fluid simulations</span>. Traditional physics-based methods, while accurate, are computationally intensive and suffer from latency issues. Recent machine‑learning methods reduce computational costs while preserving fidelity; yet most still fail to satisfy the latency constraints for real‑time use and lack support for interactive applications. To bridge this gap, we introduce a novel hybrid method that integrates numerical simulation, neural physics, and generative control. Our neural physics jointly pursues low-latency simulation and high physical fidelity by employing a fallback safeguard to classical numerical solvers. Furthermore, we develop a diffusion-based controller that is trained using a revserve modeling strategy to generate external dynamic force fields for fluid manipulation. Our system demonstrates robust performance across diverse 2D/3D scenarios, material types, and obstacle interactions, achieving real-time simulations at high frame rates (11~29% latency) while enabling fluid control guided by user-friendly freehand sketches. We present a significant step towards practical, controllable, and physically plausible fluid simulations for real-time interactive applications.
+          </p>
+        </div>
+        <div class="has-text-centered">
+          <img src="./static/images/overview.png" width="700">
+        <!-- </div> -->
+        <!-- <div class="has-text-centered"></div> -->
+          <p>
+            <b>Figure:</b>
+            Method Overview.
+To achieve real‑time simulations, we cut latency by learning neural physics at a coarse spatiotemporal resolution, while safeguarding fidelity by automatically falling back to an MPM solver when complex fluid phenomena arise.
+For interactive control, we train a diffusion-based generative model that infers external force fields directly from user sketches.
+          </p>
+        </div>
+
+        <!-- <div class="has-text-centered">
+          <img src="./static/images/case_study.png">
+          <p>
+            <b>Figure:</b>
+            Case study of LLM reasoning for PDE control on heat (top) and wave (bottom) problems.
+          </p>
+        </div> -->
+
+<br>
+
+        <h2 class="title is-3">
+          <span class="fancy_text_color">Fluid Control Animations</span>
+        </h2>
+        <div class="columns is-centered">
+          <div class="has-text-centered">
+            <h2 class="title is-5">Water 2D Arrow (O)</h2>
+              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_water_2d_arrow.mp4" type="video/mp4"></video>
+          </div>
+          <div class="has-text-centered">
+            <h2 class="title is-5">Water 2D Oval</h2>
+              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_water_2d_target.mp4" type="video/mp4"></video>
+          </div>
+          <div class="has-text-centered">
+            <h2 class="title is-5">Sand 2D Arrow</h2>
+              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_sand_2d_arrow.mp4" type="video/mp4"></video>
+          </div>
+          <div class="has-text-centered">
+            <h2 class="title is-5">Sand 2D Oval</h2>
+              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_sand_2d_target.mp4" type="video/mp4"></video>
+          </div>
+        </div>
+        <div class="columns is-centered">
+          <div class="has-text-centered">
+            <h2 class="title is-5">Water 3D Arrow</h2>
+              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_water_3d_arrow.mp4" type="video/mp4"></video>
+          </div>
+          <div class="has-text-centered">
+            <h2 class="title is-5">Water 3D Oval</h2>
+              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_water_3d_target.mp4" type="video/mp4"></video>
+          </div>
+          <div class="has-text-centered">
+            <h2 class="title is-5">Sand 3D Arrow</h2>
+              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_sand_3d_arrow.mp4" type="video/mp4"></video>
+          </div>
+          <div class="has-text-centered">
+            <h2 class="title is-5">Sand 3D Oval</h2>
+              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_sand_3d_target.mp4" type="video/mp4"></video>
+          </div>
+        </div>
+
+<br><br>
+
+      
+        <div class="is-size-5 publication-authors">
+          <span class="author-block" style="font-size: 120%;"><i>The website is under construction. We will continue updating this project!</i></span>
+          <br><br>
+          <div class="has-text-centered">
+            <img src="./static/images/logo.png" width="200"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+</section>
+
+<!-- <br><br> -->
+
+<section class="section no_pad_section">
+  <div class="container is-max-desktop content">
+    <div class="columns is-centered has-text-centered">
+
+      <!-- <div></div> -->
+      <h2 class="title is-four-fifths">
+        <span class="fancy_text_color">Citation</span>
+      </h2>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <pre style="border-radius: 25px;">
+          <code>
+@article{xu2025hybrid,
+  title={Hybrid Neural-MPM for Interactive Fluid Simulations in Real-Time},
+  author={Xu, Jingxuan and Huang, Hong and Zou, Chuhang and Savva, Manolis and Wei, Yunchao and Chen, Wuyang},
+  journal={arXiv preprint arXiv:},
+  year={2025}
+}
+</code>
+        </pre>
+      </div>
+    </div>
+      
+  </div>
+</section>
+
+<footer class="footer" style="padding-bottom: 1.5em; padding-top: 1.5em;">
+  <div class="container">
+    <div class="content has-text-centered">
+      <span>Website based on <a href="https://pde-controller.github.io/", target="_blank">PDE-Controller</a>, <a href="https://charxiv.github.io/", target="_blank">CharXiv</a>, <a href="https://nerfies.github.io", target="_blank">Nerfies, <a href="https://mlpc-ucsd.github.io/TokenCompose/", target="_blank">TokenCompose, <a href="https://mmmu-benchmark.github.io/", target="_blank">MMMU</a>, and <a href="https://mathvista.github.io/", target="_blank">MathVista</a>.</span>
+
+
+    </div>
+  </div>
+</footer>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.bundle.min.js"></script>
+  <script src="./static/js/jquery.csv.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bulma.min.js"></script>
+  <script src="./static/js/csv_to_html_table.js"></script>
+  <script>
+    CsvToHtmlTable.init({
+      csv_path: 'data/val_result.csv', 
+      element: 'table-container', 
+      allow_download: true,
+      csv_options: {separator: ',', delimiter: '"'},
+      datatables_options: {
+        "paging": false, 
+        "order": [[3, 'desc']],
+        "columnDefs": [
+        {targets: [0], className: 'dt-left', className: 'dt-head-left'},
+        ]
+      }
+    });
+  </script>
+</body>
+</html>
