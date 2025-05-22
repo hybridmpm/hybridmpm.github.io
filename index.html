@@ -39,13 +39,13 @@
           <!-- <h2 class="subtitle is-3 publication-subtitle"></h2> -->
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="", target="_blank">
+              <a href="https://github.com/Xujxyang", target="_blank">
                 <span class="fancy_text_color">Jingxuan Xu</span>
               </a><sup>1*</sup>,
             </span>
 
             <span class="author-block">
-              <a href="", target="_blank">
+              <a href="https://hongh0.github.io", target="_blank">
                 <span class="fancy_text_color">Hong Huang</span>
               </a><sup>2*</sup>,
             </span>
@@ -142,9 +142,15 @@
       <div class="columns is-centered">
         <div class="has-text-centered">
           <!-- <h2 class="title is-5">Sand Example</h2> -->
-            <!-- <video id="teaser1" autoplay muted width="60%" controls> -->
             <video id="teaser1" autoplay muted loop width="500" controls>
-                <source src="static/videos/render_pipline_sand3d_2.mp4" type="video/mp4">
+            <!-- <video id="teaser1" autoplay muted loop width="100%" controls> -->
+                <source src="static/videos/render_pipline_sand_1.mp4" type="video/mp4">
+            </video>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="has-text-centered">
+            <video id="teaser2" autoplay muted loop width="500" controls>
+                <source src="static/videos/render_pipline_sand_2.mp4" type="video/mp4">
             </video>
         </div>
         <!-- <div class="column is-half has-text-centered">
@@ -188,55 +194,210 @@ For interactive control, we train a diffusion-based generative model that infers
           </p>
         </div>
 
-        <!-- <div class="has-text-centered">
-          <img src="./static/images/case_study.png">
-          <p>
-            <b>Figure:</b>
-            Case study of LLM reasoning for PDE control on heat (top) and wave (bottom) problems.
-          </p>
-        </div> -->
-
 <br>
 
-        <h2 class="title is-3">
+        <h2 class="title is-3 has-text-centered">
           <span class="fancy_text_color">Fluid Control Animations</span>
         </h2>
-        <div class="columns is-centered">
-          <div class="has-text-centered">
-            <h2 class="title is-5">Water 2D Arrow (O)</h2>
-              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_water_2d_arrow.mp4" type="video/mp4"></video>
+<section class="section pt-0">
+    <div class="columns is-centered mt-1">
+      <!-- ─── Water 2D Arrow ─────────────────────────────────────────── -->
+      <div class="column is-half">
+        <h2 class="title is-4 has-text-centered">Water 2D Arrow</h2>
+        <div class="columns is-mobile">
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Prediction</h3>
+            <video id="water-arrow-pred" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_water_2d_arrow/control.mp4" type="video/mp4"/>
+            </video>
           </div>
-          <div class="has-text-centered">
-            <h2 class="title is-5">Water 2D Oval</h2>
-              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_water_2d_target.mp4" type="video/mp4"></video>
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Sketch</h3>
+            <img src="static/videos/control_water_2d_arrow/control.png" width="700">
           </div>
-          <div class="has-text-centered">
-            <h2 class="title is-5">Sand 2D Arrow</h2>
-              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_sand_2d_arrow.mp4" type="video/mp4"></video>
-          </div>
-          <div class="has-text-centered">
-            <h2 class="title is-5">Sand 2D Oval</h2>
-              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_sand_2d_target.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-        <div class="columns is-centered">
-          <div class="has-text-centered">
-            <h2 class="title is-5">Water 3D Arrow</h2>
-              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_water_3d_arrow.mp4" type="video/mp4"></video>
-          </div>
-          <div class="has-text-centered">
-            <h2 class="title is-5">Water 3D Oval</h2>
-              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_water_3d_target.mp4" type="video/mp4"></video>
-          </div>
-          <div class="has-text-centered">
-            <h2 class="title is-5">Sand 3D Arrow</h2>
-              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_sand_3d_arrow.mp4" type="video/mp4"></video>
-          </div>
-          <div class="has-text-centered">
-            <h2 class="title is-5">Sand 3D Oval</h2>
-              <video id="teaser1" autoplay loop muted width="100%" controls><source src="static/videos/control_sand_3d_target.mp4" type="video/mp4"></video>
+          <!-- Ground-truth -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Ground Truth</h3>
+            <video id="water-arrow-gt" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_water_2d_arrow/gt.mp4" type="video/mp4"/>
+            </video>
           </div>
         </div>
+      </div>
+      <!-- ─── Water 2D Oval ───────────────────────────────────────────── -->
+      <div class="column is-half">
+        <h2 class="title is-4 has-text-centered">Water 2D Oval</h2>
+        <div class="columns is-mobile">
+          <!-- Prediction -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Prediction</h3>
+            <video id="water-oval-pred" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_water_2d_target/control.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Sketch</h3>
+            <img src="static/videos/control_water_2d_target/control.png" width="700">
+          </div>
+          <!-- Ground-truth -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Ground Truth</h3>
+            <video id="water-oval-gt" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_water_2d_target/gt.mp4" type="video/mp4"/>
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered mt-1">
+      <!-- ─── Sand 2D Arrow ─────────────────────────────────────────── -->
+      <div class="column is-half">
+        <h2 class="title is-4 has-text-centered">Sand 2D Arrow</h2>
+        <div class="columns is-mobile">
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Prediction</h3>
+            <video id="water-arrow-pred" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_sand_2d_arrow/control.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Sketch</h3>
+            <img src="static/videos/control_sand_2d_arrow/control.png" width="700">
+          </div>
+          <!-- Ground-truth -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Ground Truth</h3>
+            <video id="water-arrow-gt" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_sand_2d_arrow/gt.mp4" type="video/mp4"/>
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- ─── Sand 2D Oval ───────────────────────────────────────────── -->
+      <div class="column is-half">
+        <h2 class="title is-4 has-text-centered">Sand 2D Oval</h2>
+        <div class="columns is-mobile">
+          <!-- Prediction -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Prediction</h3>
+            <video id="water-oval-pred" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_sand_2d_target/control.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Sketch</h3>
+            <img src="static/videos/control_sand_2d_target/control.png" width="700">
+          </div>
+          <!-- Ground-truth -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Ground Truth</h3>
+            <video id="water-oval-gt" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_sand_2d_target/gt.mp4" type="video/mp4"/>
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered mt-1">
+      <!-- ─── Water 3D Arrow ─────────────────────────────────────────── -->
+      <div class="column is-half">
+        <h2 class="title is-4 has-text-centered">Water 3D Arrow</h2>
+        <div class="columns is-mobile">
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Prediction</h3>
+            <video id="water-arrow-pred" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_water_3d_arrow/control.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Sketch</h3>
+            <img src="static/videos/control_water_3d_arrow/control.png" width="700">
+          </div>
+          <!-- Ground-truth -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Ground Truth</h3>
+            <video id="water-arrow-gt" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_water_3d_arrow/gt.mp4" type="video/mp4"/>
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- ─── Water 3D Oval ───────────────────────────────────────────── -->
+      <div class="column is-half">
+        <h2 class="title is-4 has-text-centered">Water 3D Oval</h2>
+        <div class="columns is-mobile">
+          <!-- Prediction -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Prediction</h3>
+            <video id="water-oval-pred" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_water_3d_target/control.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Sketch</h3>
+            <img src="static/videos/control_water_3d_target/control.png" width="700">
+          </div>
+          <!-- Ground-truth -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Ground Truth</h3>
+            <video id="water-oval-gt" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_water_3d_target/gt.mp4" type="video/mp4"/>
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered mt-1">
+      <!-- ─── Sand 3D Arrow ─────────────────────────────────────────── -->
+      <div class="column is-half">
+        <h2 class="title is-4 has-text-centered">Sand 3D Arrow</h2>
+        <div class="columns is-mobile">
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Prediction</h3>
+            <video id="water-arrow-pred" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_sand_3d_arrow/control.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Sketch</h3>
+            <img src="static/videos/control_sand_3d_arrow/control.png" width="700">
+          </div>
+          <!-- Ground-truth -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Ground Truth</h3>
+            <video id="water-arrow-gt" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_sand_3d_arrow/gt.mp4" type="video/mp4"/>
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- ─── Sand 3D Oval ───────────────────────────────────────────── -->
+      <div class="column is-half">
+        <h2 class="title is-4 has-text-centered">Sand 3D Oval</h2>
+        <div class="columns is-mobile">
+          <!-- Prediction -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Prediction</h3>
+            <video id="water-oval-pred" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_sand_3d_target/control.mp4" type="video/mp4"/>
+            </video>
+          </div>
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Sketch</h3>
+            <img src="static/videos/control_sand_3d_target/control.png" width="700">
+          </div>
+          <!-- Ground-truth -->
+          <div class="column has-text-centered">
+            <h3 class="title is-5">Ground Truth</h3>
+            <video id="water-oval-gt" autoplay loop muted controls width="100%">
+              <source src="static/videos/control_sand_3d_target/gt.mp4" type="video/mp4"/>
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
 
 <br><br>
 
